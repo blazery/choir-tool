@@ -2,3 +2,15 @@
     background-color: rebeccapurple;
     width: 30%;
 }
+
+.menu__cards--header {
+    font-weight: bold;
+}
+
+.menu__groups {
+    margin-top: 15px;
+}
+
+.menu__groups--header {
+    font-weight: bold;
+}

@@ -1,3 +1,4 @@
+import cuid from 'cuid';
 import { computed, observable } from 'mobx';
 import INameCard, { ICardGroups } from '../interfaces/ICard';
 
@@ -11,6 +12,13 @@ export default class CardStore {
         const list = this.cardOrder.map((id) => this.cardsById[id]);
         return list.filter((c) => (!!c ? true : false)) as INameCard[];
     }
+
+    @computed
+    public get groupList(): ICardGroups[] {
+        const list = this.groupOrder.map((id) => this.cardGroupsById[id]);
+        return list.filter((c) => (!!c ? true : false)) as ICardGroups[];
+    }
+
     @observable
     public cardsById: byID<INameCard> = {};
 
@@ -20,12 +28,25 @@ export default class CardStore {
     @observable
     public cardGroupsById: byID<ICardGroups> = {};
 
+    @observable
+    public groupOrder: string[] = [];
+
     public constructor() {
         const cards = [
             { id: 'test', name: 'Jasper', groups: ['bass'] },
-            { id: 'test3', name: 'Heidi', offset: { x: 300, y: 500 }, groups: ['lead'] },
+            {
+                id: 'test3',
+                name: 'Heidi',
+                offset: { x: 300, y: 500 },
+                groups: ['lead']
+            },
             { id: 'test4', name: 'Rofl' },
-            { id: 'test5', name: 'le Boe', offset: { x: 300, y: 400 }, groups: ['tanner'] }
+            {
+                id: 'test5',
+                name: 'le Boe',
+                offset: { x: 300, y: 400 },
+                groups: ['tanner']
+            }
         ];
 
         const groups = [
@@ -38,6 +59,7 @@ export default class CardStore {
             acc[c.id] = c;
             return acc;
         }, {});
+        this.groupOrder = groups.map((c) => c.id);
 
         this.cardsById = cards.reduce((acc: byID<INameCard>, c: INameCard) => {
             acc[c.id] = c;
@@ -59,5 +81,52 @@ export default class CardStore {
         return groups
             ? (groups.map((gid) => this.cardGroupsById[gid]).filter((g) => !!g) as ICardGroups[])
             : [];
+    }
+
+    public removeCard(id: string) {
+        const exists = this.cardsById[id];
+        if (!exists) return;
+
+        delete this.cardsById[id];
+        const newOrder = [...this.cardOrder];
+        const index = newOrder.findIndex((i) => i === id);
+        if (index !== -1) {
+            newOrder.splice(index, 1);
+        }
+        this.cardOrder = newOrder;
+    }
+    public addCard(name: string) {
+        const id = cuid();
+        const card = {
+            id,
+            name
+        };
+
+        this.cardsById[id] = card;
+        this.cardOrder.push(id);
+    }
+    public addGroup(name: string) {
+        const id = cuid();
+        const card = {
+            id,
+            name,
+            color: '#00ff00'
+        };
+
+        this.cardGroupsById[id] = card;
+        this.groupOrder.push(id);
+    }
+
+    public removeGroup(id: string) {
+        const exists = this.cardGroupsById[id];
+        if (!exists) return;
+
+        delete this.cardGroupsById[id];
+        const newOrder = [...this.groupOrder];
+        const index = newOrder.findIndex((i) => i === id);
+        if (index !== -1) {
+            newOrder.splice(index, 1);
+        }
+        this.groupOrder = newOrder;
     }
 }

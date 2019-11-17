@@ -35,7 +35,7 @@ export class Board extends React.PureComponent<IProps, {}> {
         return connect(
             <div ref={(ref) => (this.ref = ref)} className="board-container">
                 {cardList.map((c) => (
-                    <Card id={c.id} />
+                    <Card key={c.id} id={c.id} />
                 ))}
             </div>
         );

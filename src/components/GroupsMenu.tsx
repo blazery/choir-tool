@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import AppStore from '../stores/AppStore';
 import CardMenuItem from './CardMenuItem';
+import GroupMenuItem from './GroupMenuItem';
 import './Menu.css';
 
 interface IState {
@@ -10,12 +11,12 @@ interface IState {
 }
 
 @observer
-export default class CardsMenu extends React.PureComponent<{}, IState> {
+export default class GroupsMenu extends React.PureComponent<{}, IState> {
     public state = {
         newCardName: ''
     };
     private addCard = () => {
-        AppStore.getStore().cardStore.addCard(this.state.newCardName);
+        AppStore.getStore().cardStore.addGroup(this.state.newCardName);
         this.setState({ newCardName: '' });
     }
 
@@ -29,15 +30,15 @@ export default class CardsMenu extends React.PureComponent<{}, IState> {
     }
 
     public render() {
-        const list = AppStore.getStore().cardStore.cardList;
+        const list = AppStore.getStore().cardStore.groupList;
         return (
-            <div className="menu__cards">
-                <div className="menu__cards--header">Cards:</div>
+            <div className="menu__groups">
+                <div className="menu__groups--header">Groups:</div>
                 {list.map((c) => (
-                    <CardMenuItem key={c.id} card={c} />
+                    <GroupMenuItem key={c.id} group={c} />
                 ))}
                 <input
-                    placeholder="card name"
+                    placeholder="group name"
                     onChange={this.onChange}
                     onKeyDown={this.handleNameEnter}
                     value={this.state.newCardName}
