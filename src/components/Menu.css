@@ -41,7 +41,7 @@
     --cotent-height: 36px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 5px;
 }
@@ -57,8 +57,7 @@
     border-radius: 25px;
     padding: 0px 10px;
     margin: 0px 5px;
-    flex-shrink: 1;
-    flex-grow: 0;
+    flex-grow: 1;
 }
 
 .menu__controls input,
@@ -74,10 +73,15 @@
     padding-left: 5px;
 }
 
+.menu__controls input[type='text'],
+.menu__card--content .input-container input[type='text'] {
+    width: 100%;
+}
+
 .menu__controls select,
 .menu__card--content .input-container select {
     height: 100%;
-    max-width: 90px;
+    max-width: 40%;
     font-weight: 200;
     line-height: var(--cotent-height);
     outline: 0px;
@@ -90,12 +94,12 @@
 .menu__controls__button-container,
 .menu__card--content__button-container {
     height: 100%;
-    width: 60px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     line-height: var(--cotent-height);
-    flex-grow: 1;
+    flex-shrink: 0;
+    margin-right: 5px;
 }
 
 .menu__controls button,

@@ -32,7 +32,7 @@ export default class GroupMenuItem extends React.PureComponent<IProps> {
         return (
             <div className="menu__card--content">
                 <div className="input-container">
-                    <input value={group.name} onChange={this.onChange} />
+                    <input type="text" value={group.name} onChange={this.onChange} />
                     <input type="color" value={group.color} onChange={this.onGroupColorChange} />
                 </div>
                 <div className="menu__card--content__button-container">
