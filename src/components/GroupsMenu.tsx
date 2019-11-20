@@ -1,10 +1,7 @@
-import { throwStatement } from '@babel/types';
 import { observer } from 'mobx-react';
 import React from 'react';
 import AppStore from '../stores/AppStore';
-import CardMenuItem from './CardMenuItem';
 import GroupMenuItem from './GroupMenuItem';
-import './Menu.css';
 
 interface IState {
     newCardName: string;

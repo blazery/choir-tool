@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
 import React, { FormEvent } from 'react';
-import INameCard, { ICardGroups } from '../interfaces/ICard';
+import { ICardGroups } from '../interfaces/ICard';
 import AppStore from '../stores/AppStore';
 
 interface IProps {
@@ -29,7 +29,6 @@ export default class GroupMenuItem extends React.PureComponent<IProps> {
 
     public render() {
         const { group } = this.props;
-        const store = AppStore.getStore();
         return (
             <div className="menu__card--content">
                 <input value={group.name} onChange={this.onChange} />
