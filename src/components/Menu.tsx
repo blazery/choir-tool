@@ -9,6 +9,7 @@ export default class Menu extends React.PureComponent {
     public render() {
         return (
             <div className="menu-container">
+                <div className="menu-container__header"></div>
                 <CardsMenu />
                 <GroupsMenu />
             </div>

@@ -31,9 +31,15 @@ export default class GroupMenuItem extends React.PureComponent<IProps> {
         const { group } = this.props;
         return (
             <div className="menu__card--content">
-                <input value={group.name} onChange={this.onChange} />
-                <input type="color" value={group.color} onChange={this.onGroupColorChange} />
-                <button onClick={this.deleteCard}>DEL</button>
+                <div className="input-container">
+                    <input value={group.name} onChange={this.onChange} />
+                    <input type="color" value={group.color} onChange={this.onGroupColorChange} />
+                </div>
+                <div className="menu__card--content__button-container">
+                    <button onClick={this.deleteCard}>
+                        <span className="fas fa-trash-alt" />
+                    </button>
+                </div>
             </div>
         );
     }

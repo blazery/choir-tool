@@ -1,16 +1,116 @@
 .menu-container {
-    background-color: rebeccapurple;
+    background-color: var(--main-white-color);
+    box-shadow: var(--main-shadow-color) 6px 0px 12px -6px;
     width: 30%;
+    min-width: 300px;
+    z-index: 1;
 }
 
-.menu__cards--header {
+.menu-container__header {
+    height: 0px;
+    background: var(--primary-color-normal);
+    border: 0px solid var(--primary-color-shade);
+}
+
+.menu__header {
+    height: 36px;
+    background: var(--primary-color-normal);
+    border: 0px solid var(--primary-color-shade);
     font-weight: bold;
+    padding: 0px 10px;
+}
+
+.menu__header__inner {
+    padding: 5px;
+}
+
+.menu__content {
+    padding: 10px 0 0 0;
+}
+
+.menu__controls {
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid var(--primary-color-tint);
+    padding: 5px 0 0 0;
+    margin: 5px 0 0 0;
+}
+
+.menu__controls,
+.menu__card--content {
+    --cotent-height: 36px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.menu__controls .input-container,
+.menu__card--content .input-container {
+    display: flex;
+    height: var(--cotent-height);
+    justify-content: space-between;
+    background: var(--secondary-color-tint);
+    border: 0px;
+    color: var(--main-black-color);
+    border-radius: 25px;
+    padding: 0px 10px;
+    margin: 0px 5px;
+    flex-shrink: 1;
+    flex-grow: 0;
+}
+
+.menu__controls input,
+.menu__card--content .input-container input {
+    height: 100%;
+    font-weight: 200;
+    line-height: var(--cotent-height);
+    outline: 0px;
+    border: 0px;
+    background: transparent;
+    flex-shrink: 1;
+    font-size: 1.2em;
+    padding-left: 5px;
+}
+
+.menu__controls select,
+.menu__card--content .input-container select {
+    height: 100%;
+    max-width: 90px;
+    font-weight: 200;
+    line-height: var(--cotent-height);
+    outline: 0px;
+    border: 0px;
+    background: var(--primary-color-tint);
+    margin-left: 5px;
+    margin-right: -10px;
+    font-size: 1.2em;
+}
+.menu__controls__button-container,
+.menu__card--content__button-container {
+    height: 100%;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    line-height: var(--cotent-height);
+    flex-grow: 1;
+}
+
+.menu__controls button,
+.menu__card--content__button-container button {
+    width: var(--cotent-height);
+    height: var(--cotent-height);
+    line-height: 12px;
+    background: var(--secondary-color-tint);
+    border: 0px;
+    border-radius: 50%;
+    outline: 0px;
+    font-size: 1.25em;
+    padding: 0;
 }
 
 .menu__groups {
     margin-top: 15px;
-}
-
-.menu__groups--header {
-    font-weight: bold;
 }

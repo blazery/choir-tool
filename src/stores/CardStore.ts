@@ -1,6 +1,7 @@
 import cuid from 'cuid';
 import { computed, observable } from 'mobx';
 import INameCard, { ICardGroups } from '../interfaces/ICard';
+import { createRandomColor } from '../utils/colorUtil';
 
 interface byID<T> {
     [id: string]: T | undefined;
@@ -95,22 +96,25 @@ export default class CardStore {
         }
         this.cardOrder = newOrder;
     }
-    public addCard(name: string) {
+    public addCard(name: string, groupId?: string) {
         const id = cuid();
         const card = {
             id,
             name
-        };
+        } as INameCard;
+
+        const group = groupId && this.cardGroupsById[groupId];
+        if (group) card.groups = [group.id];
 
         this.cardsById[id] = card;
         this.cardOrder.push(id);
     }
-    public addGroup(name: string) {
+    public addGroup(name: string, color?: string) {
         const id = cuid();
         const card = {
             id,
             name,
-            color: '#00ff00'
+            color: color || createRandomColor()
         };
 
         this.cardGroupsById[id] = card;
