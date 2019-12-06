@@ -1,10 +1,11 @@
 import { Color } from 'csstype';
+import { ICoord } from './ICoord';
 
 export default interface INameCard {
     id: string;
     name: string;
     groups?: string[];
-    offset?: { x: number; y: number };
+    offset?: ICoord;
 }
 
 export interface ICardGroups {

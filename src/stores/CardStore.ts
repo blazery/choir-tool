@@ -69,7 +69,7 @@ export default class CardStore {
         this.cardOrder = cards.map((c) => c.id);
     }
 
-    public moveCard(id: string, location: { x: number; y: number }) {
+    public moveCard(id: string, location?: { x: number; y: number }) {
         const card = this.cardsById[id];
         if (!card) return false;
 

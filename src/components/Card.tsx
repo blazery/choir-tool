@@ -1,3 +1,4 @@
+import { IReactionDisposer, reaction } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
 import {
@@ -7,6 +8,7 @@ import {
     DragSourceMonitor,
     DragSourceOptions
 } from 'react-dnd';
+
 import INameCard from '../interfaces/ICard';
 import AppStore from '../stores/AppStore';
 import { getClientRectOfRef } from '../utils/clientRectUtil';
@@ -19,14 +21,15 @@ interface IProps {
 
 @observer
 export class Card extends React.PureComponent<IProps, {}> {
-    public ref?: HTMLDivElement | null;
+    private ref?: HTMLDivElement | null;
+    private boardSizeChangeReaction?: IReactionDisposer;
 
     private onWindowResize = () => {
         if (this.checkRepositionNeeded()) this.resetCardPosition();
     }
     private resetCardPosition = () => {
-        const store = AppStore.getStore();
-        store.cardStore.moveCard(this.props.id, { x: 10, y: 10 });
+        // const store = AppStore.getStore();
+        // Store.cardStore.moveCard(this.props.id);
     }
     private checkRepositionNeeded = () => {
         const cardSize = getClientRectOfRef(this.ref);
@@ -54,13 +57,28 @@ export class Card extends React.PureComponent<IProps, {}> {
         return style;
     }
 
+    private pointerDownhandler = (e: MouseEvent) => {
+        e.stopPropagation();
+    }
+
     public componentDidUpdate(props: IProps) {
         if (this.checkRepositionNeeded()) this.resetCardPosition();
     }
 
+    public componentDidMount() {
+        this.boardSizeChangeReaction = reaction(
+            () => AppStore.getStore().boardStore.boardSize,
+        this.onWindowResize);
+
+        if (this.ref) {
+            this.ref.addEventListener('pointerdown', this.pointerDownhandler);
+        }
+}
+
     public render() {
         const { id, connectDragSource } = this.props;
         const card = AppStore.getStore().cardStore.cardsById[id];
+        const viewerOffset = AppStore.getStore().boardStore.viewerOffset;
 
         if (!card) return null;
 
@@ -69,8 +87,8 @@ export class Card extends React.PureComponent<IProps, {}> {
             style = {
                 ...style,
                 position: 'absolute' as 'absolute',
-                top: card.offset.y + 'px',
-                left: card.offset.x + 'px'
+                top: card.offset.y + viewerOffset.y + 'px',
+                left: card.offset.x + viewerOffset.x + 'px'
             };
         }
 
