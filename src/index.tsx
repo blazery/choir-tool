@@ -1,11 +1,12 @@
+import '@fortawesome/fontawesome-free/css/all.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style/index.css';
 import App from './components/App';
-import AppStore from './stores/AppStore'
 import * as serviceWorker from './serviceWorker';
+import AppStore from './stores/AppStore';
+import './style/index.css';
 
-AppStore.initStore()
+AppStore.initStore();
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

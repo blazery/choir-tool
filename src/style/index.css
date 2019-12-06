@@ -1,13 +1,24 @@
+:root {
+    --primary-color-normal: #673ab7;
+    --primary-color-shade: #320b86;
+    --primary-color-tint: #9a67ea;
+    --secondary-color-normal: #f48fb1;
+    --secondary-color-shade: #bf5f82;
+    --secondary-color-tint: #ffc1e3;
+    --main-shadow-color: var(--primary-color-tint, rgba(255, 158, 255, 0.8));
+    --main-white-color: #fdfdfd;
+    --main-black-color: #1b0101;
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
     width: 100%;
     height: 100vh;
+    color: var(--main-black-color);
 }
 
 #root {

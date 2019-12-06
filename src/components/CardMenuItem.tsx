@@ -33,18 +33,35 @@ export default class CardMenuItem extends React.PureComponent<IProps> {
         const groups = store.cardStore.getCardGroups(card);
         const mainGroup = groups && groups.length && groups[0];
         const allGroups = store.cardStore.groupList;
+        const selectStyle = !!mainGroup
+            ? {
+                  background: mainGroup.color
+              }
+            : {};
         return (
             <div className="menu__card--content">
-                <input value={card.name} onChange={this.onChange} />
-                <select onChange={this.onGroupChange} value={mainGroup && mainGroup.id}>
-                    <option key={'unknown'}>no group</option>
-                    {allGroups.map((g) => (
-                        <option key={g.id} value={g.id}>
-                            {g.name}
+                <div className="input-container">
+                    <input type="text" value={card.name} onChange={this.onChange} />
+                    <select
+                        style={selectStyle}
+                        onChange={this.onGroupChange}
+                        value={mainGroup && mainGroup.id}
+                    >
+                        <option style={{ background: 'var(--primary-color-tint)' }} key={'unknown'}>
+                            no group
                         </option>
-                    ))}
-                </select>
-                <button onClick={this.deleteCard}>DEL</button>
+                        {allGroups.map((g) => (
+                            <option style={{ background: g.color }} key={g.id} value={g.id}>
+                                {g.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="menu__card--content__button-container">
+                    <button onClick={this.deleteCard}>
+                        <span className="fas fa-trash-alt" />
+                    </button>
+                </div>
             </div>
         );
     }
