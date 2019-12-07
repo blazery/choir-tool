@@ -1,4 +1,5 @@
-.menu-container {
+.menu-container,
+.menu-container__content {
     background-color: var(--main-white-color);
     box-shadow: var(--main-shadow-color) 6px 0px 12px -6px;
     width: 25%;
@@ -6,12 +7,37 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .menu-container__header {
-    height: 0px;
+    display: flex;
+    height: 32px;
+    justify-content: space-around;
     background: var(--primary-color-normal);
-    border: 0px solid var(--primary-color-shade);
+    border-bottom: 1px solid var(--primary-color-shade);
+    padding: 5px 3px 0 3px;
+}
+
+.menu-tab-button {
+    height: 100%;
+    width: 100%;
+    flex-shrink: 1;
+    flex-grow: 1;
+    background-color: var(--secondary-color-tint);
+    outline: 0px;
+    margin: 0 3px 0 0;
+    border: 0px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.menu-tab-button.--active {
+    background-color: var(--secondary-color-shade);
+}
+
+.menu-tab-button:last-child {
+    margin-right: 0;
 }
 
 .menu__header {
@@ -133,4 +159,23 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+}
+
+.file-settings-container {
+    --cotent-height: 64px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.file-settings-container button {
+    width: var(--cotent-height);
+    height: var(--cotent-height);
+    line-height: 12px;
+    background: var(--secondary-color-tint);
+    border: 0px;
+    border-radius: 50%;
+    outline: 0px;
+    font-size: 1.25em;
+    padding: 0;
 }

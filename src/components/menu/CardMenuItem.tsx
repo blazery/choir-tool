@@ -1,43 +1,43 @@
-import { observer } from 'mobx-react';
-import React, { FormEvent } from 'react';
-import INameCard from '../interfaces/ICard';
-import AppStore from '../stores/AppStore';
+import { observer } from 'mobx-react'
+import React, { FormEvent } from 'react'
+import INameCard from '../../interfaces/ICard'
+import AppStore from '../../stores/AppStore'
 
 interface IProps {
-    card: INameCard;
+    card: INameCard
 }
 
 @observer
 export default class CardMenuItem extends React.PureComponent<IProps> {
     private onChange = (ev: FormEvent<HTMLInputElement>) => {
-        const cardInStore = AppStore.getStore().cardStore.cardsById[this.props.card.id];
+        const cardInStore = AppStore.getStore().cardStore.cardsById[this.props.card.id]
         if (cardInStore) {
-            cardInStore.name = ev.currentTarget.value;
+            cardInStore.name = ev.currentTarget.value
         }
     }
 
     private onGroupChange = (ev: FormEvent<HTMLSelectElement>) => {
-        const cardInStore = AppStore.getStore().cardStore.cardsById[this.props.card.id];
+        const cardInStore = AppStore.getStore().cardStore.cardsById[this.props.card.id]
         if (cardInStore) {
-            cardInStore.groups = [ev.currentTarget.value];
+            cardInStore.groups = [ev.currentTarget.value]
         }
     }
 
     private deleteCard = () => {
-        AppStore.getStore().cardStore.removeCard(this.props.card.id);
+        AppStore.getStore().cardStore.removeCard(this.props.card.id)
     }
 
     public render() {
-        const { card } = this.props;
-        const store = AppStore.getStore();
-        const groups = store.cardStore.getCardGroups(card);
-        const mainGroup = groups && groups.length && groups[0];
-        const allGroups = store.cardStore.groupList;
+        const { card } = this.props
+        const store = AppStore.getStore()
+        const groups = store.cardStore.getCardGroups(card)
+        const mainGroup = groups && groups.length && groups[0]
+        const allGroups = store.cardStore.groupList
         const selectStyle = !!mainGroup
             ? {
                   background: mainGroup.color
               }
-            : {};
+            : {}
         return (
             <div className="menu__card--content">
                 <div className="input-container">
@@ -50,7 +50,7 @@ export default class CardMenuItem extends React.PureComponent<IProps> {
                         <option style={{ background: 'var(--primary-color-tint)' }} key={'unknown'}>
                             ...
                         </option>
-                        {allGroups.map((g) => (
+                        {allGroups.map(g => (
                             <option style={{ background: g.color }} key={g.id} value={g.id}>
                                 {g.name}
                             </option>
@@ -63,6 +63,6 @@ export default class CardMenuItem extends React.PureComponent<IProps> {
                     </button>
                 </div>
             </div>
-        );
+        )
     }
 }

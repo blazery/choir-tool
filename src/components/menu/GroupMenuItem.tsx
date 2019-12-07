@@ -1,34 +1,34 @@
-import { observer } from 'mobx-react';
-import React, { FormEvent } from 'react';
-import { ICardGroups } from '../interfaces/ICard';
-import AppStore from '../stores/AppStore';
+import { observer } from 'mobx-react'
+import React, { FormEvent } from 'react'
+import { ICardGroups } from '../../interfaces/ICard'
+import AppStore from '../../stores/AppStore'
 
 interface IProps {
-    group: ICardGroups;
+    group: ICardGroups
 }
 
 @observer
 export default class GroupMenuItem extends React.PureComponent<IProps> {
     private onChange = (ev: FormEvent<HTMLInputElement>) => {
-        const groupInStore = AppStore.getStore().cardStore.cardGroupsById[this.props.group.id];
+        const groupInStore = AppStore.getStore().cardStore.cardGroupsById[this.props.group.id]
         if (groupInStore) {
-            groupInStore.name = ev.currentTarget.value;
+            groupInStore.name = ev.currentTarget.value
         }
     }
 
     private onGroupColorChange = (ev: FormEvent<HTMLInputElement>) => {
-        const groupInStore = AppStore.getStore().cardStore.cardGroupsById[this.props.group.id];
+        const groupInStore = AppStore.getStore().cardStore.cardGroupsById[this.props.group.id]
         if (groupInStore) {
-            groupInStore.color = ev.currentTarget.value;
+            groupInStore.color = ev.currentTarget.value
         }
     }
 
     private deleteCard = () => {
-        AppStore.getStore().cardStore.removeGroup(this.props.group.id);
+        AppStore.getStore().cardStore.removeGroup(this.props.group.id)
     }
 
     public render() {
-        const { group } = this.props;
+        const { group } = this.props
         return (
             <div className="menu__card--content">
                 <div className="input-container">
@@ -41,6 +41,6 @@ export default class GroupMenuItem extends React.PureComponent<IProps> {
                     </button>
                 </div>
             </div>
-        );
+        )
     }
 }
