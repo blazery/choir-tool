@@ -1,11 +1,11 @@
-import { observer } from 'mobx-react'
-import React from 'react'
-import AppStore from '../../stores/AppStore'
-import CardMenuItem from './CardMenuItem'
+import { observer } from 'mobx-react';
+import React from 'react';
+import AppStore from '../../stores/AppStore';
+import CardMenuItem from './CardMenuItem';
 
 interface IState {
-    newCardName: string
-    selectedGroup: string
+    newCardName: string;
+    selectedGroup: string;
 }
 
 @observer
@@ -13,34 +13,34 @@ export default class CardsMenu extends React.PureComponent<{}, IState> {
     public state = {
         newCardName: '',
         selectedGroup: ''
-    }
+    };
     private addCard = () => {
-        AppStore.getStore().cardStore.addCard(this.state.newCardName, this.state.selectedGroup)
-        this.setState({ newCardName: '' })
+        AppStore.getStore().cardStore.addCard(this.state.newCardName, this.state.selectedGroup);
+        this.setState({ newCardName: '' });
     }
 
     private onChange = (ev: React.FormEvent<HTMLInputElement>) => {
-        this.setState({ newCardName: ev.currentTarget.value })
+        this.setState({ newCardName: ev.currentTarget.value });
     }
     private handleNameEnter = (ev: React.KeyboardEvent) => {
         if (ev.nativeEvent.key === 'Enter') {
-            this.addCard()
+            this.addCard();
         }
     }
 
     private onGroupChange = (ev: React.FormEvent<HTMLSelectElement>) => {
-        this.setState({ selectedGroup: ev.currentTarget.value })
+        this.setState({ selectedGroup: ev.currentTarget.value });
     }
 
     public render() {
-        const list = AppStore.getStore().cardStore.cardList
-        const allGroups = AppStore.getStore().cardStore.groupList
-        const mainGroup = AppStore.getStore().cardStore.cardGroupsById[this.state.selectedGroup]
+        const list = AppStore.getStore().cardStore.cardList;
+        const allGroups = AppStore.getStore().cardStore.groupList;
+        const mainGroup = AppStore.getStore().cardStore.cardGroupsById[this.state.selectedGroup];
         const selectStyle = !!mainGroup
             ? {
                   background: mainGroup.color
               }
-            : {}
+            : {};
         return (
             <div className="menu__cards">
                 <div className="menu__header">
@@ -49,7 +49,7 @@ export default class CardsMenu extends React.PureComponent<{}, IState> {
                     </div>
                 </div>
                 <div className="menu__content">
-                    {list.map(c => (
+                    {list.map((c) => (
                         <CardMenuItem key={c.id} card={c} />
                     ))}
                 </div>
@@ -67,7 +67,7 @@ export default class CardsMenu extends React.PureComponent<{}, IState> {
                             value={mainGroup && mainGroup.id}
                         >
                             <option key={'unknown'}>no group</option>
-                            {allGroups.map(g => (
+                            {allGroups.map((g) => (
                                 <option style={{ background: g.color }} key={g.id} value={g.id}>
                                     {g.name}
                                 </option>
@@ -81,6 +81,6 @@ export default class CardsMenu extends React.PureComponent<{}, IState> {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
