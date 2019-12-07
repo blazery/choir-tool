@@ -1,0 +1,8 @@
+{
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "tslint.autoFixOnSave": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "window.zoomLevel": 0
+}

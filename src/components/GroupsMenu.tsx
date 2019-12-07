@@ -56,6 +56,7 @@ export default class GroupsMenu extends React.PureComponent<{}, IState> {
                 <div className="menu__controls">
                     <div className="input-container">
                         <input
+                            type="text"
                             placeholder="group name"
                             onChange={this.onChange}
                             onKeyDown={this.handleNameEnter}

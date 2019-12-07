@@ -1,7 +1,7 @@
 .menu-container {
     background-color: var(--main-white-color);
     box-shadow: var(--main-shadow-color) 6px 0px 12px -6px;
-    width: 30%;
+    width: 25%;
     min-width: 300px;
     z-index: 1;
     display: flex;

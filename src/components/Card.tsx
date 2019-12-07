@@ -21,8 +21,10 @@ interface IProps {
 
 @observer
 export class Card extends React.PureComponent<IProps, {}> {
+    private static DOUBLE_CLICK_TIMEOUT = 350;
     private ref?: HTMLDivElement | null;
     private boardSizeChangeReaction?: IReactionDisposer;
+    private doubleClickTimeout?: number;
 
     private onWindowResize = () => {
         if (this.checkRepositionNeeded()) this.resetCardPosition();
@@ -59,6 +61,14 @@ export class Card extends React.PureComponent<IProps, {}> {
 
     private pointerDownhandler = (e: MouseEvent) => {
         e.stopPropagation();
+        if (this.doubleClickTimeout) {
+            AppStore.getStore().cardStore.moveCard(this.props.id);
+            this.doubleClickTimeout = undefined;
+        } else {
+            this.doubleClickTimeout = window.setTimeout(() => {
+                this.doubleClickTimeout = undefined;
+            }, Card.DOUBLE_CLICK_TIMEOUT);
+        }
     }
 
     public componentDidUpdate(props: IProps) {
@@ -68,12 +78,17 @@ export class Card extends React.PureComponent<IProps, {}> {
     public componentDidMount() {
         this.boardSizeChangeReaction = reaction(
             () => AppStore.getStore().boardStore.boardSize,
-        this.onWindowResize);
+            this.onWindowResize
+        );
 
         if (this.ref) {
             this.ref.addEventListener('pointerdown', this.pointerDownhandler);
         }
-}
+    }
+
+    public componentWillUnmount() {
+        if (this.boardSizeChangeReaction) this.boardSizeChangeReaction();
+    }
 
     public render() {
         const { id, connectDragSource } = this.props;

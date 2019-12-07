@@ -48,7 +48,7 @@ export default class CardMenuItem extends React.PureComponent<IProps> {
                         value={mainGroup && mainGroup.id}
                     >
                         <option style={{ background: 'var(--primary-color-tint)' }} key={'unknown'}>
-                            no group
+                            ...
                         </option>
                         {allGroups.map((g) => (
                             <option style={{ background: g.color }} key={g.id} value={g.id}>
