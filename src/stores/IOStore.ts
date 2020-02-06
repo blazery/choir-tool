@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx';
+import { action } from 'mobx';
 import INameCard, { ICardGroups } from '../interfaces/ICard';
 import AppStore from './AppStore';
 import { byID } from './CardStore';
@@ -46,7 +46,7 @@ export default class IOStore {
                         });
                     }
                 }
-            } catch (e) {}
+            } catch (e) { }
         };
         reader.onerror = (e) => {
             console.log(e);

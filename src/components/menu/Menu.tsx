@@ -1,4 +1,3 @@
-import { throwStatement } from '@babel/types';
 import { observer } from 'mobx-react';
 import React from 'react';
 import CardsMenu from './CardsMenu';

@@ -15,6 +15,18 @@ export default class CardStore {
     }
 
     @computed
+    public get orderedCardList(): INameCard[] {
+        const groups = this.groupList;
+        const cards = this.cardList;
+        let result: INameCard[] = [];
+        groups.forEach((g) => {
+            result = result.concat(cards.filter((c) => c.groups && c.groups.includes(g.id)));
+        });
+        result = result.concat(cards.filter((c) => !c.groups));
+        return result;
+    }
+
+    @computed
     public get groupList(): ICardGroups[] {
         const list = this.groupOrder.map((id) => this.cardGroupsById[id]);
         return list.filter((c) => !!c) as ICardGroups[];
@@ -33,27 +45,27 @@ export default class CardStore {
     public groupOrder: string[] = [];
 
     public constructor() {
-        const cards = [
-            { id: 'test', name: 'Jasper', groups: ['bass'] },
-            {
-                id: 'test3',
-                name: 'Heidi',
-                offset: { x: 300, y: 500 },
-                groups: ['lead']
-            },
-            { id: 'test4', name: 'Rofl' },
-            {
-                id: 'test5',
-                name: 'le Boe',
-                offset: { x: 300, y: 400 },
-                groups: ['tanner']
-            }
+        const cards: INameCard[] = [
+            // { id: 'test', name: 'Jasper', groups: ['bass'] },
+            // {
+            //     id: 'test3',
+            //     name: 'Heidi',
+            //     offset: { x: 300, y: 500 },
+            //     groups: ['lead']
+            // },
+            // { id: 'test4', name: 'Rofl' },
+            // {
+            //     id: 'test5',
+            //     name: 'le Boe',
+            //     offset: { x: 300, y: 400 },
+            //     groups: ['tanner']
+            // }
         ];
 
-        const groups = [
-            { id: 'bass', name: 'bass', color: '#82120a' },
-            { id: 'lead', name: 'lead', color: '#4c0d80' },
-            { id: 'tanner', name: 'tanner', color: '#156f99' }
+        const groups: ICardGroups[] = [
+            // { id: 'bass', name: 'bass', color: '#82120a' },
+            // { id: 'lead', name: 'lead', color: '#4c0d80' },
+            // { id: 'tanner', name: 'tanner', color: '#156f99' }
         ];
 
         this.cardGroupsById = groups.reduce((acc: byID<ICardGroups>, c: ICardGroups) => {

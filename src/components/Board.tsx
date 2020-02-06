@@ -65,11 +65,11 @@ export class Board extends React.PureComponent<IProps, {}> {
 
     public render() {
         const { connect } = this.props;
-        const cardList = AppStore.getStore().cardStore.cardList;
+        const orderedCardList = AppStore.getStore().cardStore.orderedCardList;
 
         return connect(
             <div ref={(ref) => (this.ref = ref)} className="board-container">
-                {cardList.map((c) => (
+                {orderedCardList.map((c) => (
                     <Card key={c.id} id={c.id} />
                 ))}
             </div>

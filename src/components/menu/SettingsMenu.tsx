@@ -1,8 +1,6 @@
 import { observer } from 'mobx-react';
-import { string } from 'prop-types';
 import React, { ChangeEvent } from 'react';
 import AppStore from '../../stores/AppStore';
-import CardMenuItem from './CardMenuItem';
 
 @observer
 export default class SettingsMenu extends React.PureComponent {

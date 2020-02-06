@@ -33,13 +33,13 @@ export default class CardsMenu extends React.PureComponent<{}, IState> {
     }
 
     public render() {
-        const list = AppStore.getStore().cardStore.cardList;
+        const list = AppStore.getStore().cardStore.orderedCardList;
         const allGroups = AppStore.getStore().cardStore.groupList;
         const mainGroup = AppStore.getStore().cardStore.cardGroupsById[this.state.selectedGroup];
         const selectStyle = !!mainGroup
             ? {
-                  background: mainGroup.color
-              }
+                background: mainGroup.color
+            }
             : {};
         return (
             <div className="menu__cards">
